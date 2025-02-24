@@ -1,0 +1,45 @@
+### Installing MySQL on Amazon Linux. ###
+
+
+## Import the MySQL repository GPG key: ##
+    sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+
+
+## Download the MySQL community release RPM file: ##
+    sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+
+
+## Install the MySQL community release RPM file: ##
+     sudo dnf install mysql80-community-release-el9-1.noarch.rpm -y
+
+
+## Install MySQL server: ##
+  sudo dnf install mysql-community-server -y
+
+
+## Start the MySQL service: ##
+     sudo systemctl start mysqld
+
+
+## Enable the MySQL service to start on boot: ##
+    sudo systemctl enable mysqld
+
+
+## After installation, you can check the version of the MySQL command-line client by running: ##
+   mysql --version
+
+
+## Find the Initial Root Password: The initial root password is usually stored in the MySQL error log file. You can find this file at /var/log/mysqld.log. Use the following command to locate the password: ##
+    sudo grep 'temporary password' /var/log/mysqld.log
+
+
+## Log in to MySQL: Use the temporary password to log in to MySQL as the root user: ##
+    mysql -u root -p
+
+
+## Change the Root Password: After logging in, you should change the root password for security reasons. Run the following commands: ##
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'YourNewStrongPassword';
+    FLUSH PRIVILEGES;
+    EXIT;
+
+
